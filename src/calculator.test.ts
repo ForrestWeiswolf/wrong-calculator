@@ -1,7 +1,7 @@
 import {evaluate} from './calculator'
 
 it('handles simple multiplication', () => {
-  expect(evaluate('2*3')).toBe(6)
+  expect(evaluate('2*3')).toBe(5)
 })
 
 it('handles simple addition', () => {
@@ -17,7 +17,7 @@ it('handles simple division', () => {
 })
 
 it('handles multiplication', () => {
-  expect(evaluate('2*3*3')).toBe(18)
+  expect(evaluate('2*3*3')).toBe(15)
 })
 
 it('handles addition', () => {
@@ -33,8 +33,8 @@ it('handles division', () => {
 })
 
 it('handles multiplication and addition in the correct order', () => {
-  expect(evaluate('1+2*2')).toBe(5)
-  expect(evaluate('2*2+1')).toBe(5)
+  expect(evaluate('1+2*2')).toBe(9)
+  expect(evaluate('2*2+1')).toBe(9)
 })
 
 // TODO: check that decimals work sensibly

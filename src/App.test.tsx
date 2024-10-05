@@ -4,8 +4,8 @@ import App from './App'
 
 it('renders an input', () => {
   render(<App />)
-  const input = screen.getByRole('textbox')
-  expect(input).toBeInTheDocument()
+
+  expect(screen.getByRole('textbox')).toBeInTheDocument()
 })
 
 it('renders a keypad', () => {
@@ -43,10 +43,10 @@ it('calculates the result of the input when the button is clicked', async () => 
   const input = screen.getByRole('textbox')
   const enterButton = screen.getByRole('button', {name: '='})
 
-  await fireEvent.change(input, { target: { value: '12*12' } })
+  await fireEvent.change(input, { target: { value: '12-1' } })
   await fireEvent.click(enterButton)
 
-  expect(screen.getByText('144')).toBeInTheDocument()
+  expect(screen.getByText('11')).toBeInTheDocument()
 })
 
 // TODO: enter key

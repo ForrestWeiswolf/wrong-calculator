@@ -1,4 +1,4 @@
-import multiply from "./multiply"
+import { multiply } from "./operations"
 
 const tokenize = (expression: string) => {
   const result = []
