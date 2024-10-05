@@ -36,3 +36,5 @@ it('handles multiplication and addition in the correct order', () => {
   expect(evaluate('1+2*2')).toBe(5)
   expect(evaluate('2*2+1')).toBe(5)
 })
+
+// TODO: check that decimals work sensibly

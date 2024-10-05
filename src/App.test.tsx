@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { within, fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
 
 it('renders an input', () => {
@@ -13,6 +13,14 @@ it('renders a keypad', () => {
 
   expect(screen.getByTestId('keypad')).toBeInTheDocument();
 })
+
+it('clicking the keypad updates the input', () => {
+  render(<App />)
+  fireEvent.click(within(screen.getByTestId('keypad')).getByText(2))
+
+  const input = screen.getByRole('textbox')
+
+  expect(input).toHaveValue('2')})
 
 it('renders an enter button', () => {
   render(<App />)

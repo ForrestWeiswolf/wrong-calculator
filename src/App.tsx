@@ -14,7 +14,7 @@ function App() {
         e => setInput(e.target.value.replace(/[^1-9\*/+\- ]/, ''))
       } value={input} />
       <button onClick={() => setResult(evaluate(input))}>Enter</button>
-      <Keypad />
+      <Keypad handlePress={k => setInput(input + k)} />
     </div>
   );
 }
