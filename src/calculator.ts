@@ -1,3 +1,5 @@
+import multiply from "./multiply"
+
 const tokenize = (expression: string) => {
   const result = []
   let token = ''
@@ -35,7 +37,9 @@ class NumericExpression implements Expression {
 
   add(e: Expression) { return new NumericExpression(this.evaluate() + e.evaluate()) }
   subtract(e: Expression) { return new NumericExpression(this.evaluate() - e.evaluate()) }
-  multiply(e: Expression) { return new NumericExpression(this.evaluate() * e.evaluate()) }
+  multiply(e: Expression) {
+    return new NumericExpression(multiply(this.evaluate(), e.evaluate()))
+  }
   divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()) }
 }
 
