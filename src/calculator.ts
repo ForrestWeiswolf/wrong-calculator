@@ -15,10 +15,10 @@ const tokenize = (expression: string) => {
 }
 
 interface Expression {
-  // add: (e: Expression) => Expression
-  // subtract: (e: Expression) => Expression
-  // multiply: (e: Expression) => Expression
-  // divide: (e: Expression) => Expression
+  add: (e: Expression) => Expression
+  subtract: (e: Expression) => Expression
+  multiply: (e: Expression) => Expression
+  divide: (e: Expression) => Expression
   evaluate: () => number
 }
 
@@ -32,6 +32,11 @@ class NumericExpression implements Expression {
   evaluate() {
     return this.value
   }
+
+  add(e: Expression) { return new NumericExpression(this.evaluate() + e.evaluate()) }
+  subtract(e: Expression) { return new NumericExpression(this.evaluate() - e.evaluate()) }
+  multiply(e: Expression) { return new NumericExpression(this.evaluate() * e.evaluate()) }
+  divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()) }
 }
 
 class ComplexExpression implements Expression {
@@ -42,16 +47,21 @@ class ComplexExpression implements Expression {
     this.children = children
   }
 
-  evaluate() {
+  add(e: Expression) { return new NumericExpression(this.evaluate() + e.evaluate()) }
+  subtract(e: Expression) { return new NumericExpression(this.evaluate() - e.evaluate()) }
+  multiply(e: Expression) { return new NumericExpression(this.evaluate() * e.evaluate()) }
+  divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()) }
+
+  evaluate(): number {
     switch (this.operation) {
       case '+':
-        return this.children[0].evaluate() + this.children[1].evaluate();
+        return this.children[0].add(this.children[1]).evaluate();
       case '-':
-        return this.children[0].evaluate() - this.children[1].evaluate();
+        return this.children[0].subtract(this.children[1]).evaluate();
       case '*':
-        return this.children[0].evaluate() * this.children[1].evaluate();
+        return this.children[0].multiply(this.children[1]).evaluate();
       case '/':
-        return this.children[0].evaluate() / this.children[1].evaluate();
+        return this.children[0].divide(this.children[1]).evaluate();
       default:
         return NaN;
     }
