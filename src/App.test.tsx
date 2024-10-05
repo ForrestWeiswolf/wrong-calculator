@@ -22,9 +22,9 @@ it('clicking the keypad updates the input', () => {
 
   expect(input).toHaveValue('2')})
 
-it('renders an enter button', () => {
+it('renders an = button', () => {
   render(<App />)
-  const button = screen.getByRole('button', {name: 'Enter'})
+  const button = screen.getByRole('button', {name: '='})
   expect(button).toBeInTheDocument()
 })
 
@@ -41,7 +41,7 @@ it('calculates the result of the input when the button is clicked', async () => 
   render(<App />)
 
   const input = screen.getByRole('textbox')
-  const enterButton = screen.getByRole('button', {name: 'Enter'})
+  const enterButton = screen.getByRole('button', {name: '='})
 
   await fireEvent.change(input, { target: { value: '12*12' } })
   await fireEvent.click(enterButton)

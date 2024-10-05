@@ -1,11 +1,12 @@
 import React from 'react'
 import { operations } from './calculator'
+import './keypad.css'
 
 const Keypad = ({ handlePress }: { handlePress: (k: string) => void }) => {
   const KeyButton = ({ value }: { value: string }) =>
     <button onClick={() => handlePress(value)}>{value}</button>
 
-  return <div data-testid="keypad">
+  return <div data-testid="keypad" className="keypad">
     <div>
       {operations.map(o => <KeyButton key={o} value={o} />)}
     </div>
