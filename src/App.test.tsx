@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import App from './App'
 
 it('renders an input', () => {
@@ -8,10 +8,16 @@ it('renders an input', () => {
   expect(input).toBeInTheDocument()
 })
 
+it('renders a keypad', () => {
+  render(<App />)
+
+  expect(screen.getByTestId('keypad')).toBeInTheDocument();
+})
+
 it('renders an enter button', () => {
   render(<App />)
-  const buttons = screen.getByRole('button')
-  expect(within(buttons).getByText('Enter')).toBeInTheDocument()
+  const button = screen.getByRole('button', {name: 'Enter'})
+  expect(button).toBeInTheDocument()
 })
 
 it('only allows input of numbers and simple operators', async () => {
@@ -23,12 +29,11 @@ it('only allows input of numbers and simple operators', async () => {
   expect(input).toHaveValue('')
 })
 
-
 it('calculates the result of the input when the button is clicked', async () => {
   render(<App />)
 
   const input = screen.getByRole('textbox')
-  const enterButton = within(screen.getByRole('button')).getByText('Enter')
+  const enterButton = screen.getByRole('button', {name: 'Enter'})
 
   await fireEvent.change(input, { target: { value: '12*12' } })
   await fireEvent.click(enterButton)

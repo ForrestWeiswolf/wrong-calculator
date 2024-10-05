@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { evaluate } from './calculator';
+import Keypad from './Keypad';
 
 function App() {
   const [input, setInput] = useState('')
@@ -13,6 +14,7 @@ function App() {
         e => setInput(e.target.value.replace(/[^1-9\*/+\- ]/, ''))
       } value={input} />
       <button onClick={() => setResult(evaluate(input))}>Enter</button>
+      <Keypad />
     </div>
   );
 }

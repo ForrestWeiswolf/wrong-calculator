@@ -58,7 +58,7 @@ class ComplexExpression implements Expression {
   }
 }
 
-const operations = ['*', '/', '+', '-']
+export const operations = ['*', '/', '+', '-']
 
 export const evaluate = (expression: string): number => {
   const tokens = tokenize(expression)
