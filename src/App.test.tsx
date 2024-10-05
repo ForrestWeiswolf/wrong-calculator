@@ -14,6 +14,15 @@ it('renders an enter button', () => {
   expect(within(buttons).getByText('Enter')).toBeInTheDocument()
 })
 
+it('only allows input of numbers and simple operators', async () => {
+  render(<App />)
+  const input = screen.getByRole('textbox')
+
+  await fireEvent.change(input, { target: { value: 'j' } })
+
+  expect(input).toHaveValue('')
+})
+
 
 it('calculates the result of the input when the button is clicked', async () => {
   render(<App />)
