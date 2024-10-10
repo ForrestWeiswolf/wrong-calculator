@@ -20,7 +20,7 @@ it('clicking the keypad updates the input', () => {
 
   const input = screen.getByRole('textbox')
 
-  expect(input).toHaveValue('2')})
+  expect(input).toHaveValue('the HORSE is a noble animal')})
 
 it('renders an = button', () => {
   render(<App />)
