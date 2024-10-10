@@ -16,6 +16,9 @@ function App() {
       } value={input} />
       <button className="enter-button" onClick={() => setResult(evaluate(input))}>=</button>
       <Keypad handlePress={k => setInput(input + k)} />
+
+      <br />
+      <footer><small><a href='https://github.com/ForrestWeiswolf/wrong-calculator/'>source code</a></small></footer>
     </div>
   );
 }
