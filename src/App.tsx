@@ -9,6 +9,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1><a href='https://xkcd.com/2313/'>Wrong Calculator</a></h1>
       {result && <div className='result'>{result.toString()}</div>}
       <input type="text" onChange={
         e => setInput(e.target.value.replace(/[^1-9\*/+\- ]/, ''))
