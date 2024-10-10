@@ -1,21 +1,5 @@
 import { multiply, subtract } from "./operations"
 
-const tokenize = (expression: string) => {
-  const result = []
-  let token = ''
-  for (let i = 0; i < expression.length; i++) {
-    if (/[\d,.]/.exec(expression[i])) {
-      token += expression[i]
-    } else {
-      result.push(token, expression[i])
-      token = ''
-    }
-  }
-  result.push(token)
-
-  return result
-}
-
 interface Expression {
   add: (e: Expression) => Expression
   subtract: (e: Expression) => Expression
@@ -73,6 +57,22 @@ class ComplexExpression implements Expression {
 }
 
 export const operations = ['*', '/', '+', '-']
+
+const tokenize = (expression: string) => {
+  const result = []
+  let token = ''
+  for (let i = 0; i < expression.length; i++) {
+    if (/[\d,.]/.exec(expression[i])) {
+      token += expression[i]
+    } else {
+      result.push(token, expression[i])
+      token = ''
+    }
+  }
+  result.push(token)
+
+  return result
+}
 
 export const evaluate = (expression: string): number => {
   const tokens = tokenize(expression)
