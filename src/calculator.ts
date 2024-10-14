@@ -27,7 +27,7 @@ class NumericExpression implements Expression {
   divide(e: Expression) { return new NumericExpression(this.evaluate() / e.evaluate()) }
 }
 
-class ComplexExpression implements Expression {
+class OperatorExpression implements Expression {
   operation: string
   children: Expression[]
   constructor(operation: string, children: Expression[]) {
@@ -81,21 +81,21 @@ export const evaluate = (expression: string): number => {
 
   for (let i = 1; i < tokens.length; i++) {
     if (expressionTree instanceof NumericExpression) {
-      expressionTree = new ComplexExpression(tokens[i], [expressionTree])
+      expressionTree = new OperatorExpression(tokens[i], [expressionTree])
       workingLeaf = expressionTree
     } else if (operations.includes(tokens[i])) {
-      const leaf = (workingLeaf as ComplexExpression);
+      const leaf = (workingLeaf as OperatorExpression);
       if (operations.indexOf(leaf.operation) > operations.indexOf(tokens[i])) {
         const lastChild = leaf.children.pop()
-        leaf.children.push(new ComplexExpression(tokens[i], [lastChild!]))
+        leaf.children.push(new OperatorExpression(tokens[i], [lastChild!]))
         workingLeaf = leaf.children[leaf.children.length - 1]
       } else {
-        expressionTree = new ComplexExpression(tokens[i], [expressionTree])
+        expressionTree = new OperatorExpression(tokens[i], [expressionTree])
       }
-    } else if (expressionTree instanceof ComplexExpression && expressionTree.children.length === 1) {
+    } else if (expressionTree instanceof OperatorExpression && expressionTree.children.length === 1) {
       expressionTree.children.push(new NumericExpression(parseInt(tokens[i])))
     } else {
-      const leaf = (workingLeaf as ComplexExpression);
+      const leaf = (workingLeaf as OperatorExpression);
 
       leaf.children.push(new NumericExpression(parseFloat(tokens[i])))
     }
